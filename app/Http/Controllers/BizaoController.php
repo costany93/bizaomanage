@@ -47,8 +47,6 @@ class BizaoController extends Controller
         if($input == null){
             echo "en attente";
         }else{
-            
-            $input['date'] = new DateTime();
             Notification::create($input);
         }
         
