@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Donateur;
+use App\Helpers\MyPrivateToken;
 use App\Http\Requests\Bizaorequest;
 use App\Notification;
 use DateTime;
@@ -23,7 +24,7 @@ class BizaoController extends Controller
                 'country-code' => 'CI',
                 'category' => 'BIZAO-RETAIL',
                 'lang' => 'en',
-                'authorization' => 'Bearer c59e5f8c-b093-3aef-a158-223e845a6e8e',
+                'authorization' => MyPrivateToken::getMyPrivateToken(),
                 'Cookie' => 'SERVERID=s0; SERVERID=s1',
             ])->post('https://api.bizao.com/debitCard/v1', [
                 'order_id' => $order_id,
