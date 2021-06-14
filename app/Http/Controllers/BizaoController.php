@@ -16,17 +16,10 @@ class BizaoController extends Controller
 
     public function getApiUrl(Bizaorequest $request){
         $input = $request->all();
-
+        $headers = MyPrivateToken::getMyPrivateToken();
 
         $order_id = 'Anas_'.time();
-            $response = Http::withHeaders([
-                'Content-Type' => 'application/json',
-                'country-code' => 'CI',
-                'category' => 'BIZAO-RETAIL',
-                'lang' => 'en',
-                'authorization' => MyPrivateToken::getMyPrivateToken(),
-                'Cookie' => 'SERVERID=s0; SERVERID=s1',
-            ])->post('https://api.bizao.com/debitCard/v1', [
+            $response = Http::withHeaders($headers)->post('https://api.bizao.com/debitCard/v1', [
                 'order_id' => $order_id,
                 'reference' => 'Anas',
                 'amount' => $request->montant,
