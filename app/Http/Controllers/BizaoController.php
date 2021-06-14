@@ -45,7 +45,7 @@ class BizaoController extends Controller
     public function bizaoNotification(Request $request){
         $input = $request->all();
         if($input == null){
-            echo "en attente le monde est à nous et vous";
+            echo "en attente";
         }else{
             
             $input['date'] = new DateTime();
