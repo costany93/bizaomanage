@@ -17,22 +17,18 @@ class BizaoController extends Controller
     public function getApiUrl(Bizaorequest $request){
         $input = $request->all();
         $headers = MyPrivateToken::getMyPrivateToken();
-
         $order_id = 'Anas_'.time();
-            $response = Http::withHeaders($headers)->post('https://api.bizao.com/debitCard/v1', [
-                'order_id' => $order_id,
-                'reference' => 'Anas',
-                'amount' => $request->montant,
-                'currency' => 'XOF',
-                'return_url' => 'https://anasngo.org/',
-                'state' => 'anasngo'
-            ]);
+        $url = MyPrivateToken::getMyApiUrl();
 
-            $input['reference_don'] = $order_id;
+        $data =MyPrivateToken::getMyData($request->montant, $order_id);
+        
+        $response = Http::withHeaders($headers)->post($url, $data);
 
-            Donateur::create($input);
+        $input['reference_don'] = $order_id;
 
-            $url_payment = $response['payment_url'];
+        Donateur::create($input);
+
+        $url_payment = $response['payment_url'];
         return redirect($url_payment);
     }
 
