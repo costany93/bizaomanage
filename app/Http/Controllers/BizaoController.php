@@ -23,7 +23,7 @@ class BizaoController extends Controller
                 'country-code' => 'CI',
                 'category' => 'BIZAO-RETAIL',
                 'lang' => 'en',
-        
+                'authorization' => 'Bearer c59e5f8c-b093-3aef-a158-223e845a6e8e',
                 'Cookie' => 'SERVERID=s0; SERVERID=s1',
             ])->post('https://api.bizao.com/debitCard/v1', [
                 'order_id' => $order_id,
@@ -43,9 +43,15 @@ class BizaoController extends Controller
     }
 
     public function bizaoNotification(Request $request){
-
         $input = $request->all();
-        Notification::create($input);
+        if($input == null){
+            echo "en attente";
+        }else{
+            
+            $input['date'] = new DateTime();
+            Notification::create($input);
+        }
+        
         return response()->json($request);
     }
 }
