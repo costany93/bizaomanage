@@ -63,7 +63,7 @@
                     </div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-4">
-                            <a href="#" class="btn btn-primary btn-block">Revenir au site</a>
+                            <a href="https://anasngo.org/" class="btn btn-primary btn-block">Revenir au site</a>
                         </div>
                     </div>
                   </div>
