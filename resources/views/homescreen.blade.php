@@ -31,7 +31,7 @@
                       <div class="card-body">
                           @include('include.form_error')
                         <h3 class="text-white">Merci pour votre geste</h3>
-                        <p class="text-white">UN PETIT GESTE, UNE GRANDE PORTÉE</p>
+                        <p class="text-white">UN PETIT GESTE, UNE GRANDE PORTÉE, UNE AIDE</p>
                         {!! Form::open(['method' => 'POST', 'action' => 'BizaoController@getApiUrl']) !!}
                                 <div class="form-group">
                                     {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Entrez votre nom']) !!}
