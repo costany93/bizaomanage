@@ -3,7 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
-/app/Http/Controllers/Bizacontroller.php
+/app/Http/Controllers/BizaoController.php
 .env
 .env.backup
 .phpunit.result.cache
