@@ -48,4 +48,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/bizaogeturl', 'BizaoController@getApiUrl');
 
-Route::get('/pays', 'BizaoController@postCountries');
+//Route::get('/pays', 'BizaoController@postCountries');

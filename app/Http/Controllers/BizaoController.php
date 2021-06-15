@@ -46,7 +46,7 @@ class BizaoController extends Controller
         return response()->json($request);
     }
 
-    public function postCountries(){
+    /*public function postCountries(){
         $country_list = array(
             "Afghanistan",
             "Albania",
@@ -248,5 +248,5 @@ class BizaoController extends Controller
 
             Pays::create(['name' => $country_list[$i]]);
         }
-    }
+    }*/
 }
