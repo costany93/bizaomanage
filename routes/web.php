@@ -1,5 +1,6 @@
 <?php
 
+use App\Pays;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +36,8 @@ Route::get('/', function () {
 
     return $response['payment_url'];*/
 
-    return view('homescreen');
+    $pays = Pays::pluck('name', 'id')->all();
+    return view('homescreen', compact('pays'));
 });
 
 route::match(['get', 'post'], '/notification', 'BizaoController@bizaoNotification')->name('notification');
@@ -45,3 +47,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/bizaogeturl', 'BizaoController@getApiUrl');
+
+Route::get('/pays', 'BizaoController@postCountries');

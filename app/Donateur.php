@@ -13,6 +13,11 @@ class Donateur extends Model
         'email',
         'numero',
         'montant',
-        'reference_don'
+        'reference_don',
+        'pays_id'
     ];
+
+    public function pays(){
+        return $this->belongsTo('App\Pays');
+    }
 }

@@ -45,10 +45,13 @@
                                 <div class="form-group">
                                     {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Entrez votre numéro de téléphone']) !!}
                                 </div>
+
                                 <div class="form-group">
                                     {!! Form::number('montant', null, ['class' => 'form-control', 'placeholder' => 'Entrez le montant de votre donation']) !!}
                                 </div>
-
+                                <div class="form-group">
+                                    {!! Form::select('pays',$pays, null, ['class' => 'form-control']) !!}
+                                </div>
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-lg-6">
                                         {!! Form::submit('Faire le don', ['class' => 'btn btn-outline-light btn-block my-2']) !!}
