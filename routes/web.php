@@ -48,4 +48,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/bizaogeturl', 'BizaoController@getApiUrl');
 
+Route::get('/paiement-success','BizaoController@PaymentSuccess');
+
 //Route::get('/pays', 'BizaoController@postCountries');

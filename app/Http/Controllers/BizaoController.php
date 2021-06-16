@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Donateur;
 use App\Helpers\MyPrivateToken;
 use App\Http\Requests\Bizaorequest;
+use App\Mail\PaymentSuccessMail;
 use App\Notification;
 use App\Pays;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class BizaoController extends Controller
 {
@@ -44,6 +46,19 @@ class BizaoController extends Controller
         }
         
         return response()->json($request);
+    }
+    public function PaymentSuccess(){
+        $details = [
+            "nom" => "Kandza",
+            "Prenom" => "Prince Valdech Costany",
+            "title" => "Merci pour votre don fait à ANAS",
+            "body" => "Nous vous remercions infiniment du don que vous venez de faire à l'Association Nationale des Albinos du Sénégal",
+            "montant" => "5000"
+        ];
+
+        Mail::to('kandzaprince@gmail.com')->send(new PaymentSuccessMail($details));
+
+        echo "Mail envoyé";
     }
 
     /*public function postCountries(){
