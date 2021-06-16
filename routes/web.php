@@ -40,7 +40,7 @@ Route::get('/', function () {
     return view('homescreen', compact('pays'));
 });
 
-route::match(['get', 'post'], '/notification', 'BizaoController@bizaoNotification')->name('notification');
+route::match(['post', 'get'], '/notification', 'BizaoController@bizaoNotification')->name('notification');
 
 Auth::routes();
 
