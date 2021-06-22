@@ -13,14 +13,15 @@
   </head>
   <body>
     <img src="images/logo.png" alt="">
-    <h1>Merci pour votre don fait à ANAS</h1>
-    <p>Nous vous remercions infiniment Kandza prince valdech costany du don que vous venez de faire à l'Association Nationale des Albinos du Sénégal</p>
+    <h1>{{$details['title']}}</h1>
+    <p>Nous vous remercions infiniment {{$details['nom']}} - {{$details['prenom']}} du don que vous venez de faire à l'Association Nationale des Albinos du Sénégal</p>
     <h2>Informations sur le don</h2>
-    <p>Nom du donateur : <strong>Kandza</strong></p>
-    <p>Prénom du donateur : <strong>Prince Valdech Costany</strong></p>
-    <p>Pays : <strong>Congo</strong></p>
-    <p>Montant : <strong>5000 XOF</strong></p>
-    <p>Date de paiement : <strong>18/12/5200</strong></p>
+    <p>Nom du donateur : <strong>{{$details['nom']}}</strong></p>
+    <p>Prénom du donateur : <strong>{{$details['prenom']}}</strong></p>
+    <p>Pays : <strong>{{$details['pays']}}</strong></p>
+    <p>Montant : <strong>{{$details['montant']}}</strong></p>
+    <p>Date de paiement : <strong>{{$details['date']}}</strong></p>
+    <a href="#" class="btn btn-success">Téléchargez le reçu</a>
     <script src="js/app.js"></script>
   </body>
 </html>

@@ -5,6 +5,7 @@
 /vendor
 /app/Http/Controllers/BizaoController.php
 /app/Helpers/MyPrivateToken.php
+/app/Helpers/GetMyAccessCode.php
 .env
 .env.backup
 .phpunit.result.cache

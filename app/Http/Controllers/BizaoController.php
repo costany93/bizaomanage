@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Donateur;
+use App\Helpers\GetMyAccessCode;
 use App\Helpers\MyPrivateToken;
 use App\Http\Requests\Bizaorequest;
 use App\Mail\PaymentSuccessMail;
@@ -10,6 +11,7 @@ use App\Notification;
 use App\Pays;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Mail;
 
 class BizaoController extends Controller
@@ -47,18 +49,52 @@ class BizaoController extends Controller
         
         return response()->json($request);
     }
-    public function PaymentSuccess(){
+
+    public function checkAccess(Request $request){
+        $validate = $request->validate([
+            "code" => ['required']
+        ]);
+
+        $access = GetMyAccessCode::getMyAccessCode($request->code);
+
+        if($access == true){
+            $code = $request->code;
+            $pays = Pays::pluck('name', 'id')->all();
+            return view('homescreen', compact('pays','code'));
+        }else{
+            return "Accès denied";
+        }
+        
+    }
+    public function PaymentSuccess($order_id){
+
+       /* $donateur = Donateur::where('reference_don', $order_id)->get()->first();
+
+        $pays = Pays::where('id', $donateur->pays_id)->get()->first();
+
+        $pays_name = $pays->name;
         $details = [
-            "nom" => "Kandza",
-            "Prenom" => "Prince Valdech Costany",
+            "nom" => $donateur->nom,
+            "prenom" => $donateur->prenom,
             "title" => "Merci pour votre don fait à ANAS",
             "body" => "Nous vous remercions infiniment du don que vous venez de faire à l'Association Nationale des Albinos du Sénégal",
-            "montant" => "5000"
+            "montant" => $donateur->montant,
+            "pays" => $pays_name,
+            "date" => $donateur->created_at
         ];
 
-        Mail::to('kandzaprince@gmail.com')->send(new PaymentSuccessMail($details));
+        Mail::to($donateur->email)->send(new PaymentSuccessMail($details));*/
 
-        echo "Mail envoyé";
+        echo "mail envoyé";
+    }
+
+    public function getRecu($order_id){
+
+        
+        /*$pdf = PDF::loadView('pdf.recu');
+        return $pdf->download('reçu'.time().".pdf");*/
+
+        return view("pdf.recu");
     }
 
     /*public function postCountries(){

@@ -34,11 +34,16 @@ Route::get('/', function () {
         'state' => 'anasngo'
     ]);
 
-    return $response['payment_url'];*/
+    return $response['payment_url'];
 
     $pays = Pays::pluck('name', 'id')->all();
-    return view('homescreen', compact('pays'));
+    return view('homescreen', compact('pays'));*/
+
+    return view('donation');
 });
+
+Route::match(['post','get'],'/donation', 'BizaoController@checkAccess')->name('access');
+
 
 route::match(['post', 'get'], '/notification', 'BizaoController@bizaoNotification')->name('notification');
 
@@ -48,6 +53,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/bizaogeturl', 'BizaoController@getApiUrl');
 
-Route::get('/paiement-success','BizaoController@PaymentSuccess');
+Route::get('/paiement-success/{order_id}','BizaoController@PaymentSuccess');
+
+Route::get('/download/{order_id}','BizaoController@getRecu');
 
 //Route::get('/pays', 'BizaoController@postCountries');
