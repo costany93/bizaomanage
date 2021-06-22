@@ -62,7 +62,7 @@ class BizaoController extends Controller
             $pays = Pays::pluck('name', 'id')->all();
             return view('homescreen', compact('pays','code'));
         }else{
-            return "Accès denied";
+            return redirect("donation");
         }
         
     }
