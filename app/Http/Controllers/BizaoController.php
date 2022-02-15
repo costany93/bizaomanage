@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 class BizaoController extends Controller
 {
     //
+    
 
     public function getApiUrl(Bizaorequest $request){
         $input = $request->all();

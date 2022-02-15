@@ -17,29 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    /*$order_id = 'Anas_'.time();
-    $response = Http::withHeaders([
-        'Content-Type' => 'application/json',
-        'country-code' => 'CI',
-        'category' => 'BIZAO-RETAIL',
-        'lang' => 'en',
-        'authorization' => 'Bearer c59e5f8c-b093-3aef-a158-223e845a6e8e',
-        'Cookie' => 'SERVERID=s0; SERVERID=s1',
-    ])->post('https://api.bizao.com/debitCard/v1', [
-        'order_id' => $order_id,
-        'reference' => 'Anas',
-        'amount' => 500,
-        'currency' => 'XOF',
-        'return_url' => 'https://anasngo.org/',
-        'state' => 'anasngo'
-    ]);
-
-    return $response['payment_url'];
 
     $pays = Pays::pluck('name', 'id')->all();
-    return view('homescreen', compact('pays'));*/
-
-    return view('donation');
+    return view('homescreen', compact('pays'));
 });
 
 Route::match(['post','get'],'/donation', 'BizaoController@checkAccess')->name('access');
