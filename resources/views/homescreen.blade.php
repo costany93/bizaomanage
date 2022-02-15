@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-lg-6">
-                                        {!! Form::submit('Faire le don', ['class' => 'btn btn-outline-light btn-block my-2']) !!}
+                                        {!! Form::submit('Make the donation', ['class' => 'btn btn-outline-light btn-block my-2']) !!}
                                     </div>
                                 </div>
 
