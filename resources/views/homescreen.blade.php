@@ -60,7 +60,7 @@
                       </div>
                     </div>
                     <div class="alert alert-success mt-2">
-                        <p class="text-center ">Après avoir entrée les informations concernant votre don, vous serez automatiquement redirigé sur une plate-forme de paiement sécurisé sur laquelle vous allez procéder au paiement</p>
+                        <p class="text-center ">After entering your donation information, you will be automatically redirected to a secure payment platform where you can make your payment</p>
                     </div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-4">
