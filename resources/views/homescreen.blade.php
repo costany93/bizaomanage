@@ -28,24 +28,24 @@
                     <div class="card anas-bg card-form text-center">
                       <div class="card-body">
                           @include('include.form_error')
-                        <h3 class="text-white">Merci pour votre geste</h3>
-                        <p class="text-white">UN PETIT GESTE, UNE GRANDE PORTÉE</p>
+                        <h3 class="text-white">Thank you for the gesture</h3>
+                        <p class="text-white">A SMALL GESTURE, A BIG IMPACT</p>
                         {!! Form::open(['method' => 'POST', 'action' => 'BizaoController@getApiUrl']) !!}
                                 <div class="form-group">
-                                    {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Entrez votre nom']) !!}
+                                    {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Please enter your name']) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::text('prenom', null, ['class' => 'form-control', 'placeholder' => 'Entrez votre prénom']) !!}
+                                    {!! Form::text('prenom', null, ['class' => 'form-control', 'placeholder' => 'Please enter your first name']) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Entrez votre email']) !!}
+                                    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Enter your e-mail address']) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Entrez votre numéro de téléphone']) !!}
+                                    {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Please enter your phone number']) !!}
                                 </div>
 
                                 <div class="form-group">
-                                    {!! Form::number('montant', null, ['class' => 'form-control', 'placeholder' => 'Entrez le montant de votre donation']) !!}
+                                    {!! Form::number('montant', null, ['class' => 'form-control', 'placeholder' => 'Enter the amount of your donation']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::select('pays',$pays, null, ['class' => 'form-control']) !!}
