@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="css/app.css">
-    <title>Faire un don à l'ANAS</title>
+    <title>Make Donation to Anas</title>
     <style>
         .body{
             height: 700px;

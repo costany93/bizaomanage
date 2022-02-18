@@ -33,6 +33,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/bizaogeturl', 'BizaoController@getApiUrl');
 
+
+
 Route::get('/paiement-success/{order_id}','BizaoController@PaymentSuccess');
 
 Route::get('/download/{order_id}','BizaoController@getRecu');

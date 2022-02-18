@@ -8,6 +8,7 @@
 /app/Helpers/GetMyAccessCode.php
 .env
 .env.backup
+.env2
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

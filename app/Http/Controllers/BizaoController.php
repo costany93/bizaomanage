@@ -12,6 +12,7 @@ use App\Pays;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class BizaoController extends Controller
@@ -66,6 +67,47 @@ class BizaoController extends Controller
             return redirect("donation");
         }
         
+    }
+
+    //Cette fonction me permet de mettre à jour les status des transactions et de renvoyer les nouvelles données au format json
+    public function getDataFromDatabase(Request $request){
+
+        $transactions = DB::table('donateurs')->get();
+
+        $headers = MyPrivateToken::getHeadersStatus();
+        $url = MyPrivateToken::getStatusUrl();
+
+
+        $access_validation = $request->header('access-validation');
+        $access_code = $request->header('access-code');
+        $access_name = $request->header('access-name');
+
+        $my_access_code = MyPrivateToken::getAccessCode();
+        $my_access_validation = MyPrivateToken::getAccessValidation();
+        $my_access_name = MyPrivateToken::getAccessName();
+
+        if($access_validation == $my_access_validation && $access_code == $my_access_code && $access_name == $my_access_name){
+            
+            foreach($transactions as $transaction){
+            
+
+            $response = Http::withHeaders($headers)->get($url.$transaction->reference_don);
+
+            if($response->status() == 200){
+                $update = DB::table('donateurs')
+              ->where('id', $transaction->id)
+              ->update(['status' => $response['status']]);
+            }
+        }
+        $transactions_updates = DB::table('donateurs')->get();
+
+        return response()->json($transactions_updates);
+
+        }
+
+        
+
+        return response()->json("Cannot access");
     }
     public function PaymentSuccess($order_id){
 
