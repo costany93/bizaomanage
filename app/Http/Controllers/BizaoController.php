@@ -112,6 +112,11 @@ class BizaoController extends Controller
 
     //Nous retourne des informations des transactions sur une période données et en fonction du status des transactions
     public function getDataFromPeriodApi(Request $request){
+        //headers
+        $headers = MyPrivateToken::getHeadersStatus();
+        $url = MyPrivateToken::getStatusUrl();
+
+
         //Request access header my access header check
         $access_validation = $request->header('access-validation');
         $access_code = $request->header('access-code');
@@ -129,16 +134,36 @@ class BizaoController extends Controller
             //check my input required fields
             if($request->input('begin_date') && $request->input('endate') && $request->input('status')){
 
-
-             
                 $transactions = DB::table('donateurs')
                 ->select()
                 ->whereBetween('created_at', [$request->input('begin_date'), $request->input('endate')])
                 ->where('status', '=', $request->input('status'))
                 ->get();
+
+                
+
+                foreach($transactions as $transaction){
+            
+
+                    $response = Http::withHeaders($headers)->get($url.$transaction->reference_don);
+        
+                    if($response->status() == 200){
+                        $update = DB::table('donateurs')
+                      ->where('id', $transaction->id)
+                      ->update(['status' => $response['status']]);
+                    }
+                }
+             
+                
     
-    
-                return response()->json($transactions);
+                $transactions_updates = DB::table('donateurs')
+                ->select()
+                ->whereBetween('created_at', [$request->input('begin_date'), $request->input('endate')])
+                ->where('status', '=', $request->input('status'))
+                ->get();
+
+
+                return response()->json($transactions_updates);
             }else{
                 return response()->json("Some field missed, check all required fields. Data not found");
             }
