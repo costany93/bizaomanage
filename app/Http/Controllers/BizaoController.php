@@ -70,7 +70,7 @@ class BizaoController extends Controller
     }
 
     //Cette fonction me permet de mettre à jour les status des transactions et de renvoyer les nouvelles données au format json
-    public function getDataFromDatabase(Request $request){
+    public function getDataFromDatabaseApi(Request $request){
 
         $transactions = DB::table('donateurs')->get();
 
@@ -109,6 +109,51 @@ class BizaoController extends Controller
 
         return response()->json("Cannot access");
     }
+
+    //Nous retourne des informations des transactions sur une période données et en fonction du status des transactions
+    public function getDataFromPeriodApi(Request $request){
+        //Request access header my access header check
+        $access_validation = $request->header('access-validation');
+        $access_code = $request->header('access-code');
+        $access_name = $request->header('access-name');
+
+        //Get my access
+        $my_access_code = MyPrivateToken::getAccessCode();
+        $my_access_validation = MyPrivateToken::getAccessValidation();
+        $my_access_name = MyPrivateToken::getAccessName();
+
+
+        //make my access headers check 
+        if($access_validation == $my_access_validation && $access_code == $my_access_code && $access_name == $my_access_name){
+
+            //check my input required fields
+            if($request->input('begin_date') && $request->input('endate') && $request->input('status')){
+
+
+             
+                $transactions = DB::table('donateurs')
+                ->select()
+                ->whereBetween('created_at', [$request->input('begin_date'), $request->input('endate')])
+                ->where('status', '=', $request->input('status'))
+                ->get();
+    
+    
+                return response()->json($transactions);
+            }else{
+                return response()->json("Some field missed, check all required fields. Data not found");
+            }
+
+        }else{
+            return response()->json('Access denied');
+        }
+        
+    }
+
+
+
+
+
+
     public function PaymentSuccess($order_id){
 
        /* $donateur = Donateur::where('reference_don', $order_id)->get()->first();
