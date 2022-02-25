@@ -69,11 +69,10 @@ class BizaoController extends Controller
         
     }
 
-    //Cette fonction me permet de mettre à jour les status des transactions et de renvoyer les nouvelles données au format json
-    public function getDataFromDatabaseApi(Request $request){
+    //cette fonction actualize les status des transactions
+    public function actualizeStatus(Request $request){
 
         $transactions = DB::table('donateurs')->get();
-
         $headers = MyPrivateToken::getHeadersStatus();
         $url = MyPrivateToken::getStatusUrl();
 
@@ -96,25 +95,43 @@ class BizaoController extends Controller
             if($response->status() == 200){
                 $update = DB::table('donateurs')
               ->where('id', $transaction->id)
-              ->update(['status' => $response['status']]);
+                ->update(['status' => $response['status']]);
+                }
             }
         }
-        $transactions_updates = DB::table('donateurs')->get();
 
-        return response()->json($transactions_updates);
+        return response()->json();
+    }
 
-        }
+    //Cette fonction me permet de mettre à jour les status des transactions et de renvoyer les nouvelles données au format json
+    public function getDataFromDatabaseApi(Request $request){
+
+
+        $access_validation = $request->header('access-validation');
+        $access_code = $request->header('access-code');
+        $access_name = $request->header('access-name');
+
+        $my_access_code = MyPrivateToken::getAccessCode();
+        $my_access_validation = MyPrivateToken::getAccessValidation();
+        $my_access_name = MyPrivateToken::getAccessName();
+
+            if($access_validation == $my_access_validation && $access_code == $my_access_code && $access_name == $my_access_name){
+                
+                
+            $transactions_updates = DB::table('donateurs')->get();
+
+            return response()->json($transactions_updates);
+
+            }
 
         
 
-        return response()->json("Cannot access");
+            return response()->json("Cannot access");
     }
 
     //Nous retourne des informations des transactions sur une période données et en fonction du status des transactions
     public function getDataFromPeriodApi(Request $request){
-        //headers
-        $headers = MyPrivateToken::getHeadersStatus();
-        $url = MyPrivateToken::getStatusUrl();
+
 
 
         //Request access header my access header check
@@ -133,26 +150,7 @@ class BizaoController extends Controller
 
             //check my input required fields
             if($request->input('begin_date') && $request->input('endate') && $request->input('status')){
-
-                $transactions = DB::table('donateurs')
-                ->select()
-                ->whereBetween('created_at', [$request->input('begin_date'), $request->input('endate')])
-                ->where('status', '=', $request->input('status'))
-                ->get();
-
                 
-
-                foreach($transactions as $transaction){
-            
-
-                    $response = Http::withHeaders($headers)->get($url.$transaction->reference_don);
-        
-                    if($response->status() == 200){
-                        $update = DB::table('donateurs')
-                      ->where('id', $transaction->id)
-                      ->update(['status' => $response['status']]);
-                    }
-                }
              
                 
     

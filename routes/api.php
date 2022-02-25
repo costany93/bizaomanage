@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/retrieveData', 'BizaoController@getDataFromDatabaseApi')->name('retrieveData');
 
 Route::post('/datafromperiod', 'BizaoController@getDataFromPeriodApi')->name('data-from-period');
+
+Route::get('/actualize', 'BizaoController@actualizeStatus')->name('retrieveData');
